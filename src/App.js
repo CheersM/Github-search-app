@@ -9,7 +9,6 @@ import { setItems, setHistory } from './redux/actions';
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
-  const [timeoutId, setTimeoutId] = React.useState(null);
   const dispatch = useDispatch();
   const { repos, historySearch } = useSelector(({ items, historySearch }) => {
     return {
@@ -18,12 +17,16 @@ function App() {
     };
   });
 
+  console.log(searchValue);
+
   React.useEffect(() => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      setTimeoutId(null);
-    }
-    const t = setTimeout(() => {
+    let timerId;
+    const debounce = (func, delay) => {
+      clearTimeout(timerId);
+      timerId = setTimeout(func, delay);
+    };
+
+    debounce(() => {
       axios
         .get(`https://api.github.com/search/repositories?per_page=100&q=${searchValue}`)
         .then(({ data }) => {
@@ -49,9 +52,8 @@ function App() {
             );
           }
         });
-    }, 200);
-    setTimeoutId(t);
-  }, []);
+    }, 300);
+  }, [dispatch, historySearch, repos, searchValue]);
 
   return (
     <div className="wrapper">

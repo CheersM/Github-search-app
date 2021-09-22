@@ -6,13 +6,16 @@ function Search({ searchValue, setSearchValue, history }) {
     setSearchValue(e.target.value);
   };
 
-  console.log(history);
-
   return (
     <div className="header">
       <div className="header__icon">
         <a href="/">
-          <img width={35} height={35} src="/img/github_logo.svg" alt="Github icon" />
+          <img
+            width={35}
+            height={35}
+            src={process.env.PUBLIC_URL + '/img/github_logo.svg'}
+            alt="Github icon"
+          />
         </a>
       </div>
       <div className="header__search">
@@ -38,9 +41,24 @@ function Search({ searchValue, setSearchValue, history }) {
         </div>
       </div>
       <div className="header__opt" data-title="These options have not yet been implemented.">
-        <img width={18} height={18} src="/img/bell.svg" alt="options icon1" />
-        <img width={18} height={18} src="/img/plus.svg" alt="options icon1" />
-        <img width={18} height={18} src="/img/user.svg" alt="options icon1" />
+        <img
+          width={18}
+          height={18}
+          src={process.env.PUBLIC_URL + '/img/bell.svg'}
+          alt="opt icon1"
+        />
+        <img
+          width={18}
+          height={18}
+          src={process.env.PUBLIC_URL + '/img/plus.svg'}
+          alt="opt icon1"
+        />
+        <img
+          width={18}
+          height={18}
+          src={process.env.PUBLIC_URL + '/img/user.svg'}
+          alt="opt icon1"
+        />
       </div>
     </div>
   );
@@ -49,6 +67,7 @@ function Search({ searchValue, setSearchValue, history }) {
 Search.propTypes = {
   searchValue: PropTypes.string.isRequired,
   setSearchValue: PropTypes.func.isRequired,
+  history: PropTypes.array.isRequired,
 };
 
 export default Search;

@@ -50,11 +50,14 @@ body {
         padding: 6px;
         margin-left: 20px;
         background-color: #24292f;
+        color: #fff;
         transition: width 0.2s ease-in-out;
 
         &:focus {
           background-color: #fff;
           width: 600px;
+          color: #000;
+
           &:focus ~ .header__search-value {
             position: absolute;
             display: block;
@@ -83,7 +86,7 @@ body {
 
                 svg {
                   opacity: 0.6;
-									margin-right: 10px;
+                  margin-right: 10px;
                 }
               }
             }
