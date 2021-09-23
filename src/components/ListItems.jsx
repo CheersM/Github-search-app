@@ -3,8 +3,6 @@ import { format, parse } from 'date-fns';
 import PropTypes from 'prop-types';
 
 function ListItems({ items, count }) {
-  console.log(count);
-
   return (
     <div className="content">
       {items.length === 0 ? (
