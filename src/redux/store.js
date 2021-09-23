@@ -1,24 +1,19 @@
-import { createStore } from 'redux';
-// import { persistStore, persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
 import rootReducer from './rootReducer';
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+import { createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-export default store;
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// };
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// export default () => {
-//   let store = createStore(persistedReducer);
-//   let predictor = persistStore(store);
-//   return { store, persistor: predictor };
-// };
+// eslint-disable-next-line import/no-anonymous-default-export
+export default () => {
+  let store = createStore(persistedReducer);
+  let persistor = persistStore(store);
+  return { store, persistor };
+};

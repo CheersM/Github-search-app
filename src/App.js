@@ -7,6 +7,7 @@ import { setItems, setHistory } from './redux/actions';
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
+  const [timerId, setTimerId] = React.useState('');
   const [count, setCount] = React.useState(null);
   const dispatch = useDispatch();
   const { repos, historySearch } = useSelector(({ items, historySearch }) => {
@@ -17,13 +18,14 @@ function App() {
   });
 
   React.useEffect(() => {
-    let timerId;
     const debounce = (func, delay) => {
       clearTimeout(timerId);
-      timerId = setTimeout(func, delay);
+      const t = setTimeout(func, delay);
+      setTimerId(t);
     };
 
     debounce(() => {
+      if (!searchValue) return;
       axios
         .get(`https://api.github.com/search/repositories?per_page=100&q=${searchValue}`)
         .then(({ data }) => {
@@ -51,11 +53,18 @@ function App() {
           }
         });
     }, 500);
-  }, [dispatch, historySearch, repos, searchValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
   return (
     <div className="wrapper">
-      <Search setSearchValue={setSearchValue} searchValue={searchValue} history={historySearch} />
+      <Search
+        setSearchValue={(v) => {
+          setSearchValue(v);
+        }}
+        searchValue={searchValue}
+        history={historySearch}
+      />
       <ListItems items={repos[historySearch[historySearch.length - 1]]} count={count} />
     </div>
   );
