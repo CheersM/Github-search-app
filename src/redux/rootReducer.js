@@ -1,7 +1,6 @@
 const initialState = {
   items: {},
   historySearch: [],
-  searchValue: '',
   isLoaded: false,
 };
 

@@ -4,6 +4,13 @@ import { createStore } from 'redux';
 
 import rootReducer from './rootReducer';
 
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
+
+export default store;
+
 // const persistConfig = {
 //   key: 'root',
 //   storage,
@@ -15,12 +22,3 @@ import rootReducer from './rootReducer';
 //   let predictor = persistStore(store);
 //   return { store, persistor: predictor };
 // };
-
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
-
-//window.store = store;
-
-export default store;

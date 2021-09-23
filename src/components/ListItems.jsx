@@ -2,7 +2,7 @@ import React from 'react';
 import { format, parse } from 'date-fns';
 import PropTypes from 'prop-types';
 
-function ListItems({ items }) {
+function ListItems({ items, count }) {
   return (
     <div className="content">
       {items.length === 0 ? (
@@ -10,7 +10,7 @@ function ListItems({ items }) {
       ) : (
         <div className="content__list">
           <div className="content__list-title">
-            <h2>{items.length} repository result</h2>
+            <h2>{count} repository result</h2>
           </div>
           <div className="content__list-block">
             {items.map((item, id) => (
@@ -68,6 +68,7 @@ function ListItems({ items }) {
 
 ListItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 ListItems.defaultProps = {

@@ -9,7 +9,7 @@ function Search({ searchValue, setSearchValue, history }) {
   return (
     <div className="header">
       <div className="header__icon">
-        <a href="/">
+        <a href="/" target="_self">
           <img
             width={35}
             height={35}

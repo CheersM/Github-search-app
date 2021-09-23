@@ -2,13 +2,12 @@ import axios from 'axios';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ListItems from './components/ListItems';
-import Search from './components/Search';
-
+import { ListItems, Search } from './components';
 import { setItems, setHistory } from './redux/actions';
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
+  const [count, setCount] = React.useState(null);
   const dispatch = useDispatch();
   const { repos, historySearch } = useSelector(({ items, historySearch }) => {
     return {
@@ -16,8 +15,6 @@ function App() {
       historySearch: historySearch,
     };
   });
-
-  console.log(searchValue);
 
   React.useEffect(() => {
     let timerId;
@@ -50,15 +47,16 @@ function App() {
                 [searchValue]: data.items,
               }),
             );
+            setCount(data.total_count);
           }
         });
-    }, 300);
+    }, 500);
   }, [dispatch, historySearch, repos, searchValue]);
 
   return (
     <div className="wrapper">
       <Search setSearchValue={setSearchValue} searchValue={searchValue} history={historySearch} />
-      <ListItems items={repos[historySearch[historySearch.length - 1]]} />
+      <ListItems items={repos[historySearch[historySearch.length - 1]]} count={count} />
     </div>
   );
 }
