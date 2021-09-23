@@ -109,6 +109,7 @@ body {
 
       &:hover::after {
         content: attr(data-title);
+        z-index: 2;
         position: absolute;
         border-radius: 10px;
         background-color: #e4ccb5;
@@ -202,6 +203,21 @@ body {
                 font-size: 13px;
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width:550px) {
+  .content__list-block {
+    ul {
+      li {
+        div {
+          span {
+            display: block;
+            margin-bottom: 10px;
           }
         }
       }
