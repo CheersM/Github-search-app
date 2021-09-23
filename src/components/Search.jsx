@@ -28,7 +28,7 @@ function Search({ searchValue, setSearchValue, history }) {
         <div className={history.length === 0 ? 'nonValue' : 'header__search-value'}>
           {history.map((item, index) => (
             <ul key={index}>
-              <li>
+              <li onClick={searchValue}>
                 <svg aria-hidden="true" height="16" width="16" viewBox="0 0 16 16" version="1.1">
                   <path
                     fillRule="evenodd"

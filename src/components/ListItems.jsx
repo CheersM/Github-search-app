@@ -3,6 +3,8 @@ import { format, parse } from 'date-fns';
 import PropTypes from 'prop-types';
 
 function ListItems({ items, count }) {
+  console.log(count);
+
   return (
     <div className="content">
       {items.length === 0 ? (
@@ -10,7 +12,7 @@ function ListItems({ items, count }) {
       ) : (
         <div className="content__list">
           <div className="content__list-title">
-            <h2>{count} repository result</h2>
+            <h2>{count ? count.toLocaleString('en') : count} repository result</h2>
           </div>
           <div className="content__list-block">
             {items.map((item, id) => (
@@ -21,7 +23,6 @@ function ListItems({ items, count }) {
                       fillRule="evenodd"
                       d="M 2 2.5 A 2.5 2.5 0 0 1 4.5 0 h 8.75 a 0.75 0.75 0 0 1 0.75 0.75 v 12.5 a 0.75 0.75 0 0 1 -0.75 0.75 h -2.5 a 0.75 0.75 0 1 1 0 -1.5 h 1.75 v -2 h -8 a 1 1 0 0 0 -0.714 1.7 a 0.75 0.75 0 0 1 -1.072 1.05 A 2.495 2.495 0 0 1 2 11.5 v -9 Z m 10.5 -1 V 9 h -8 c -0.356 0 -0.694 0.074 -1 0.208 V 2.5 a 1 1 0 0 1 1 -1 h 8 Z M 5 12.25 v 3.25 a 0.25 0.25 0 0 0 0.4 0.2 l 1.45 -1.087 a 0.25 0.25 0 0 1 0.3 0 L 8.6 15.7 a 0.25 0.25 0 0 0 0.4 -0.2 v -3.25 a 0.25 0.25 0 0 0 -0.25 -0.25 h -3.5 a 0.25 0.25 0 0 0 -0.25 0.25 Z"></path>
                   </svg>
-
                   <div>
                     <a href={item.html_url}>{item.full_name}</a>
                     <p className="description">{item.description}</p>
@@ -73,6 +74,7 @@ ListItems.propTypes = {
 
 ListItems.defaultProps = {
   items: [],
+  count: null,
 };
 
 export default ListItems;
